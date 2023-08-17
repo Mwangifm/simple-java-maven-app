@@ -28,13 +28,6 @@ pipeline {
             steps {
                 sh './jenkins/scripts/deliver.sh' 
             }
-        }
-        stage('Docker Build') {
-            agent any
-            steps {
-                sh 'docker build -t mwangifm/my-app1'
-            }
-        }
         stage('Docker Push') {
             agent any
             steps {
