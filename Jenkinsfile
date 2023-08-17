@@ -29,14 +29,5 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh' 
             }
         }
-        stage('Docker Push') {
-    	    agent any
-            steps {
-      	        {
-        	    sh "docker login -u mwangifm -p Ngaietha2023"
-                sh 'docker push hello-world:latest'
-        }
-      }
     }
-}
 }
