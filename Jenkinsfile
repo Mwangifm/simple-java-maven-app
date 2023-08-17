@@ -29,5 +29,19 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh' 
             }
         }
+        stage(Docker Build) {
+            agent any
+            steps {
+                sh 'docker build -t mwangifm/my-app1'
+            }
+        }
+        stage(Docker Push) {
+            agent any
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'Ngaietha2023', usernameVariable: 'mwangifm')]) {
+        	    sh "docker login -u ${env.DockerUser} -p ${env.DockerPassword}"
+                sh 'docker push mwangifm/my-app1'
+            }
+        }
     }
 }
