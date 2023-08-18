@@ -32,7 +32,7 @@ pipeline {
         stage('Docker Build') {
     	    agent any
             steps {
-                sh 'docker build -t shanem/spring-petclinic:latest .'
+                sh 'docker build -t mwangifm/my-app:latest .'
              }
         }
         stage('Docker Push') {
@@ -40,7 +40,7 @@ pipeline {
             steps {
             	withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'DockerPassword', usernameVariable: 'DockerUser')]) {
             	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                 sh 'docker push shanem/spring-petclinic:latest'
+                 sh 'docker push mwangifm/my-app:latest'
         }
       }
     }
