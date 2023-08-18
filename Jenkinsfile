@@ -29,5 +29,20 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh' 
             }
         }
+        stage('Docker Build') {
+    	    agent any
+            steps {
+                sh 'docker build -t shanem/spring-petclinic:latest .'
+             }
+        }
+        stage('Docker Push') {
+    	    agent any
+            steps {
+            	withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'DockerPassword', usernameVariable: 'DockerUser')]) {
+            	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                 sh 'docker push shanem/spring-petclinic:latest'
+        }
+      }
     }
+}
 }
