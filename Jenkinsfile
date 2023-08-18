@@ -41,8 +41,8 @@ pipeline {
             	withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'DockerPassword', usernameVariable: 'DockerUser')]) {
             	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
                  sh 'docker push mwangifm/my-app:latest'
-        }
-      }
+                }
+            }
+         }
     }
-}
 }
