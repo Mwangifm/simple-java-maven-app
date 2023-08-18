@@ -29,18 +29,12 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh' 
             }
         }
-        stage('Docker Build') {
-    	    agent any
-            steps {
-                sh 'docker build -t mwangifm/my-app:latest .'
-             }
-        }
         stage('Docker Push') {
     	    agent any
             steps {
             	withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'DockerPassword', usernameVariable: 'DockerUser')]) {
             	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                 sh 'docker push mwangifm/my-app:latest'
+                 sh 'docker push hello-world:latest'
                 }
             }
          }
